@@ -5,7 +5,7 @@
 - Full sing-box operation permissions.
 - Fully functional LuCI interface.
 ## ⚠️ Compatibility
-- It only supports ImmortalWrt 25.12.0-rc2 or later.
+- It only supports using **apk** package manager. So you must be make sure your OpenWrt version in 25.12 or later.
 - Some features of the Sing-Box vary depending on the device.
 ## ⚖️ License
 > LuCI-APP based on GPLv3
