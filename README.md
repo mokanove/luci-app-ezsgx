@@ -8,6 +8,6 @@
 - It only supports using **apk** package manager. So you must be make sure your OpenWrt version in 25.12 or later.
 - Some features of the Sing-Box vary depending on the device.
 ## ⚖️ License
-> LuCI-APP based on GPLv3
+> This project is licensed under the **[GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.html)**
 >
-> Built-in sing-box based on <https://github.com/SagerNet/sing-box/blob/testing/LICENSE>
+> Built-in [sing-box](https://github.com/SagerNet/sing-box) based on <https://github.com/SagerNet/sing-box/blob/testing/LICENSE>
