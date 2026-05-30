@@ -36,6 +36,12 @@ jobs:
             tags: "with_quic with_utls with_acme with_clash_api with_gvisor badlinkname tfogo_checklinkname0 with_musl"
             extra: ""
             nickname: "linux-arm64-musl"
+          - sing-box_arch: "amd64"
+            goos: "windows"
+            sing-box_branch: "testing"
+            tags: "with_quic with_utls with_gvisor with_clash_api tfogo_checklinkname0 badlinkname"
+            extra: ""
+            nickname: "windows-amd64-v2rayN.exe"
 
     steps:
       - name: Checkout Code
@@ -64,7 +70,7 @@ jobs:
         run: |
           cd sing-box
           ${{ matrix.extra }} GOOS=${{ matrix.goos }} TAGS="${{ matrix.tags }}" make -j$(nproc)
-          mv sing-box "sing-box-${{ matrix.nickname }}"
+          mv sing-box* "sing-box-${{ matrix.nickname }}"
 
       - name: Release
         uses: softprops/action-gh-release@master
