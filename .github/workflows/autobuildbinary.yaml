@@ -7,7 +7,7 @@ permissions:
   contents: write
 jobs:
   build:
-    name: Build for ${{ matrix.patch_arch }}
+    name: ${{ matrix.sing-box_arch }}-${{ matrix.sing-box_os }}_${{ matrix.sing-box_branch }}_${{ matrix.cgo_enabled }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -19,6 +19,13 @@ jobs:
             tags: "with_quic with_utls with_acme tfogo_checklinkname0 badlinkname"
             cgo_enabled: "1"
             goamd64: "v4"
+
+          - sing-box_arch: "amd64"
+            sing-box_os: "linux"
+            sing-box_branch: "testing"
+            tags: "with_quic with_utls with_acme tfogo_checklinkname0 badlinkname"
+            cgo_enabled: "1"
+            goamd64: "v3"
 
     steps:
       - name: Checkout Code
@@ -47,12 +54,13 @@ jobs:
         run: |
           cd sing-box
           CGO_ENABLED=${{ matrix.cgo_enabled }} GOAMD64=${{ matrix.goamd64 }} TAGS="${{ matrix.tags }}" make -j$(nproc)
+          mv sing-box "sing-box-${{ matrix.sing-box_arch }}-${{ matrix.sing-box_os }}_${{ matrix.sing-box_branch }}_${{ matrix.cgo_enabled }}"
 
       - name: Release
         uses: softprops/action-gh-release@master
         with:
-          tag_name: 101001
-          files: sing-box/sing-box
+          tag_name: test
+          files: sing-box/sing-box*
           body: |
             # 📝 Release Notes
             - Try to CI Build sing-box
