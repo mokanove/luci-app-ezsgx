@@ -71,7 +71,7 @@ jobs:
         uses: softprops/action-gh-release@master
         with:
           tag_name: test
-          files: sing-box/sing-box-${{ sing-box_branch }}-${{ matrix.goos }}-${{ matrix.sing-box_arch }}
+          files: sing-box/sing-box-${{ matrix.sing-box_branch }}-${{ matrix.goos }}-${{ matrix.sing-box_arch }}
           body: |
             # This release created by GitHub Actions
             - Make sing-box with some tags i need
