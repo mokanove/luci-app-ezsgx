@@ -1,4 +1,4 @@
-name: Rebirth, SHIMA
+name: Build sing-box Binary
 
 on:
   push:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 jobs:
   build:
-    name: ${{ matrix.sing-box_arch }}-${{ matrix.sing-box_os }}_${{ matrix.sing-box_branch }}_${{ matrix.cgo_enabled }}
+    name: ${{ matrix.sing-box_arch }}-${{ matrix.sing-box_os }}_${{ matrix.sing-box_branch }}_${{ matrix.tags }}_${{ matrix.cgo_enabled }}_${{ matrix.goamd64 }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -54,13 +54,13 @@ jobs:
         run: |
           cd sing-box
           CGO_ENABLED=${{ matrix.cgo_enabled }} GOAMD64=${{ matrix.goamd64 }} TAGS="${{ matrix.tags }}" make -j$(nproc)
-          mv sing-box "sing-box-${{ matrix.sing-box_arch }}-${{ matrix.sing-box_os }}_${{ matrix.sing-box_branch }}_${{ matrix.cgo_enabled }}"
+          mv sing-box "sing-box-${{ matrix.sing-box_arch }}-${{ matrix.sing-box_os }}_${{ matrix.sing-box_branch }}_${{ matrix.tags }}_${{ matrix.cgo_enabled }}_${{ matrix.goamd64 }}"
 
       - name: Release
         uses: softprops/action-gh-release@master
         with:
           tag_name: test
-          files: sing-box/sing-box*
+          files: sing-box/sing-box-${{ matrix.sing-box_arch }}-${{ matrix.sing-box_os }}_${{ matrix.sing-box_branch }}_${{ matrix.tags }}_${{ matrix.cgo_enabled }}_${{ matrix.goamd64 }}
           body: |
             # 📝 Release Notes
             - Try to CI Build sing-box
