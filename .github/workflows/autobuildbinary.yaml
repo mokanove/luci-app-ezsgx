@@ -36,6 +36,12 @@ jobs:
             tags: "with_quic with_utls with_gvisor with_clash_api tfogo_checklinkname0 badlinkname"
             extra: "CGO_ENABLED=1 GOAMD64=v4"
             nickname: "linux-amd64v4-glibc-v2rayN"
+          - sing-box_arch: "ard64"
+            goos: "macos"
+            sing-box_branch: "stable"
+            tags: "with_quic with_utls with_gvisor with_clash_api tfogo_checklinkname0 badlinkname"
+            extra: ""
+            nickname: "windows-amd64-v2rayN.exe"
           - sing-box_arch: "amd64"
             goos: "windows"
             sing-box_branch: "stable"
@@ -75,7 +81,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@master
         with:
-          tag_name: +windows
+          tag_name: +mac
           files: sing-box/sing-box-${{ matrix.nickname }}
           body: |
             # This release created by GitHub Actions
