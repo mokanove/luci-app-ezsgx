@@ -37,7 +37,7 @@ jobs:
             extra: "CGO_ENABLED=1 GOAMD64=v4"
             nickname: "linux-amd64v4-glibc-v2rayN"
           - sing-box_arch: "arm64"
-            goos: "macos"
+            goos: "darwin"
             sing-box_branch: "stable"
             tags: "with_quic with_utls with_gvisor with_clash_api tfogo_checklinkname0 badlinkname"
             extra: "GOARCH=arm64"
