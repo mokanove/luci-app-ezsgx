@@ -71,13 +71,13 @@ jobs:
         shell: bash
         run: |
           cd sing-box
-          sed -i 's/CGO_ENABLED=0 GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) go run/CGO_ENABLED=0 GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) GOAMD64= go run/' Makefile
+          sed -i 's/GOOS= GOARCH= go run/CGO_ENABLED=0  GOAMD64= go run/' Makefile
     
       - name: Build!
         shell: bash
         run: |
           cd sing-box
-          VERSION=$(GOAMD64= CGO_ENABLED=0 go run github.com/sagernet/sing-box/cmd/internal/read_tag@latest)
+          VERSION=$(go run github.com/sagernet/sing-box/cmd/internal/read_tag@latest)
           ${{ matrix.extra }} TAGS="${{ matrix.tags }}" VERSION="$VERSION" make -j$(nproc)
           mv sing-box* "sing-box-${{ matrix.sing-box_branch}}-${{ matrix.nickname }}"
 
