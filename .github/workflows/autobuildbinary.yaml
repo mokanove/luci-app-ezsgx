@@ -44,6 +44,9 @@ jobs:
             nickname: "windows-amd64-v2rayN.exe"
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@main
+    
       - name: Clone sing-box Source Code
         shell: bash
         run: |
