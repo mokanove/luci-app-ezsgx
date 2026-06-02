@@ -69,19 +69,12 @@ jobs:
         uses: actions/setup-go@main
         with:
           go-version: 'stable'
-          
-      - name: Patch Makefile
-        shell: bash
-        run: |
-          cd sing-box
-          sed -i 's/GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) go run/GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) GOAMD64= go run/' Makefile
     
       - name: Build!
         shell: bash
         run: |
           cd sing-box
-          VERSION=$(go run github.com/sagernet/sing-box/cmd/internal/read_tag@latest)
-          ${{ matrix.extra }} TAGS="${{ matrix.tags }}" VERSION="$VERSION" make -j$(nproc)
+          ${{ matrix.extra }} TAGS="${{ matrix.tags }}" make -j$(nproc)
           mv sing-box* "sing-box-${{ matrix.sing-box_branch}}-${{ matrix.nickname }}"
 
       - name: Release
