@@ -69,7 +69,13 @@ jobs:
         uses: actions/setup-go@main
         with:
           go-version: 'stable'
-    
+        
+      - name: Patch Makefile
+        shell: bash
+        run: |
+          cd sing-box
+          sed -i 's/GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) go run/GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) GOAMD64= go run/' Makefile
+          
       - name: Build!
         shell: bash
         run: |
