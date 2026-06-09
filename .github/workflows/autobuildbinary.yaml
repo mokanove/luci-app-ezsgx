@@ -51,15 +51,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
+        with:
+          path: /dev/null
     
       - name: Clone sing-box Source Code
         shell: bash
         run: |
-          git clone https://github.com/SagerNet/sing-box.git
-
-      - name: Change branch
-        shell: bash
-        run: |
+          git clone https://github.com/SagerNet/sing-box.gits
           cd sing-box
           git checkout ${{ matrix.sing-box_branch }}
           git pull
@@ -69,17 +67,12 @@ jobs:
         uses: actions/setup-go@main
         with:
           go-version: 'stable'
-        
-      - name: Patch Makefile
-        shell: bash
-        run: |
-          cd sing-box
-          sed -i 's/GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) go run/GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) GOAMD64= go run/' Makefile
           
       - name: Build!
         shell: bash
         run: |
           cd sing-box
+          sed -i 's/GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) go run/GOOS=$(GOHOSTOS) GOARCH=$(GOHOSTARCH) GOAMD64= go run/' Makefile
           VERSION=$(go run github.com/sagernet/sing-box/cmd/internal/read_tag@latest)
           ${{ matrix.extra }} TAGS="${{ matrix.tags }}" VERSION="$VERSION" make -j$(nproc)
           mv sing-box* "sing-box-${{ matrix.sing-box_branch}}-${{ matrix.nickname }}"
