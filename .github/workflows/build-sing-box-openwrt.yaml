@@ -64,14 +64,14 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@master
         with:
-        tag_name: sing-box-openwrt
-        files: ${{ github.workspace }}/sing-box-${{ matrix.patch_arch }}.apk
-        body: |
-          # 🚀 sing-box OpenWrt
-          > with some tag i need and performance +++++
-          # ⚠️ Filename rule
-          > sing-box-patch-arch
-          # 🪞 Mirror
-          [By myself](https://867678.xyz/doc/Mirror)
+          tag_name: sing-box-openwrt
+          files: ${{ github.workspace }}/sing-box-${{ matrix.patch_arch }}.apk
+          body: |
+            # 🚀 sing-box OpenWrt
+            > with some tag i need and performance +++++
+            # ⚠️ Filename rule
+            > sing-box-patch-arch
+            # 🪞 Mirror
+            [By myself](https://867678.xyz/doc/Mirror)
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
