@@ -10,7 +10,7 @@ permissions:
   contents: write
 jobs:
   build:
-    name: Build sing-box-${{ matrix.sing-box_branch }}-${{ matrix.nickname }}
+    name: Build sing-box-${{ matrix.patch_arch }}
     runs-on: ubuntu-latest
     env:
       project_name: "luci-app-ezsgx"
